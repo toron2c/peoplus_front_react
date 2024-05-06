@@ -1,0 +1,16 @@
+.homeContainer {
+ align-items: center;
+ height: 100%;
+ padding: 3rem 5rem;
+ @media screen and (max-width: 480px) {
+	padding: 1.5rem 5rem;
+ }
+}
+
+
+.logo {
+	line-height: 1.5;
+	font-size: clamp(3rem, 15vmin, 8rem);
+  font-family: sans-serif;
+
+}
