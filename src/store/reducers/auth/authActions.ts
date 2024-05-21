@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ILogin } from "../../../models/ILogin";
+import { IAuth } from "../../../models/IAuth";
 import { apiLogin, apiRegistration } from "../../../api/api";
 import { IResponseAuth } from "../../../models/IResponseAuth";
 export interface IError {
@@ -9,11 +9,11 @@ export interface IError {
 }
 export const registration = createAsyncThunk<
   IResponseAuth,
-  ILogin,
+  IAuth,
   {
     rejectValue: IError;
   }
->("auth/registration", async (data: ILogin, thunkApi) => {
+>("auth/registration", async (data: IAuth, thunkApi) => {
   try {
     const res = await apiRegistration(data);
     return res.data;
@@ -24,11 +24,11 @@ export const registration = createAsyncThunk<
 
 export const login = createAsyncThunk<
   IResponseAuth,
-  ILogin,
+  IAuth,
   {
     rejectValue: IError;
   }
->("auth/login", async (data: ILogin, thunkApi) => {
+>("auth/login", async (data: IAuth, thunkApi) => {
   try {
     const res = await apiLogin(data);
     return res.data;

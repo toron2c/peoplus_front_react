@@ -5,10 +5,9 @@ import {
   updatePassword,
 } from "../../store/reducers/auth/authSlice";
 import { login, registration } from "../../store/reducers/auth/authActions";
-import { ILogin } from "../../models/ILogin";
+import { IAuth } from "../../models/IAuth";
 import { useLocation } from "react-router-dom";
-import { HomeContainer } from "../Home/Home";
-import { Col, Row } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 
 export const AuthContainer = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +24,7 @@ export const AuthContainer = () => {
   const onClickHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const data: ILogin = {
+    const data: IAuth = {
       email,
       password,
     };
@@ -33,32 +32,52 @@ export const AuthContainer = () => {
     else dispatch(registration(data));
   };
   return (
-    <div style={{ height: "100%", display: "flex" }}>
+    <div
+      style={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Row>
-        <Col xs={24} md={10}>
-          <HomeContainer />
-        </Col>
-        <Col span={14}>
-          <form>
+        <Col span={22}>
+          <Form
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 900 }}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input value={email} onChange={onChangeEmail} />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password onChange={onChangePass} value={password} />
+            </Form.Item>
             <div>
-              EMAIL ={" "}
-              <input type="email" value={email} onChange={onChangeEmail} />
-              <br />
-              PASSWORD =
-              <input type="password" value={password} onChange={onChangePass} />
+              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button
+                  onClick={onClickHandler}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  {location.pathname === "/login"
+                    ? "Авторизоваться"
+                    : "Зарегестрироваться"}
+                </Button>
+              </Form.Item>
             </div>
-            <div>
-              {location.pathname === "/login" ? (
-                <button type="submit" onClick={onClickHandler}>
-                  Login
-                </button>
-              ) : (
-                <button type="submit" onClick={onClickHandler}>
-                  Registration
-                </button>
-              )}
-            </div>
-          </form>
+          </Form>
         </Col>
       </Row>
     </div>
