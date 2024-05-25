@@ -15,6 +15,7 @@ export const registration = createAsyncThunk<
   }
 >("auth/registration", async (data: IAuth, thunkApi) => {
   try {
+    console.log(`data - ${data.email} ${data.password}`);
     const res = await apiRegistration(data);
     return res.data;
   } catch (error: any) {
@@ -33,6 +34,6 @@ export const login = createAsyncThunk<
     const res = await apiLogin(data);
     return res.data;
   } catch (error: any) {
-    return thunkApi.rejectWithValue(error.response.data);
+    return thunkApi.rejectWithValue(error.response.data.message);
   }
 });

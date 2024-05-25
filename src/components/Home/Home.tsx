@@ -2,6 +2,8 @@ import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
 import style from "./Home.module.css";
 import { Space } from "antd";
+import Link from "antd/es/typography/Link";
+import { NavLink } from "react-router-dom";
 
 export const HomeContainer = () => {
   return (
@@ -19,6 +21,9 @@ export const HomeContainer = () => {
           для тех, кто хочет разбивать большие дела на маленькие и легко их
           выполнять.
         </Paragraph>
+        <NavLink to="registration">
+          <Link>Registration</Link>
+        </NavLink>
       </Space>
     </div>
   );
